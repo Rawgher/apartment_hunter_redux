@@ -34,3 +34,22 @@ export const apiMiddleware = store => next => action => {
       break;
   }
 };
+
+export const reducer = (state = { apartments: [], loading: true }, action) => {
+  switch (action.type) {
+    case "GET_APARTMENT_DATA_LOADING":
+      return {
+        ...state, // keep the existing state,
+        loading: true // but change loading to true
+      };
+    case "GET_APARTMENT_DATA_RECEIVED":
+      return {
+        loading: false, // set loading to false
+        apartments: action.data.apartments // update apartments array with reponse data
+      };
+    case "GET_APARTMENT_DATA_ERROR":
+      return state;
+    default:
+      return state;
+  }
+};
